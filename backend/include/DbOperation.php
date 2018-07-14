@@ -20,7 +20,7 @@ class DbOperation
             //$des="volunteer";
             $stmt = $this->con->prepare("INSERT INTO user(name,designation,phone,locality,password) values(?, ?, ?, ?, ?)");
             $stmt->bind_param("sssss", $name, $des,$phone,$locality,$pass);
-            echo "hey";
+
             $result = $stmt->execute();
             $stmt->close();
 
@@ -46,6 +46,28 @@ class DbOperation
         return $num_rows > 0;
     }
 
+    public function createEvent($eventname,$startdate,$enddate,$description,$locality,$trainee,$status){
+
+
+
+            //$des="volunteer";
+            $stmt = $this->con->prepare("INSERT INTO event(eventname,startdate,enddate,description,locality,trainees,status) values(?, ?, ?, ?, ?,?,?)");
+            echo "DB insert start\n";
+
+            $stmt->bind_param("sssssss", $eventname, $startdate,$enddate,$description,$locality,$trainee,$status);
+
+            $result = $stmt->execute();
+            print $stmt->error;
+
+            $stmt->close();
+
+            if ($result) {
+                return 0;
+            } else {
+                return 1;
+            }
+
+    }
 
     //Method to generate a unique api key every time
 
