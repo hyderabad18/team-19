@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2018 at 12:59 PM
--- Server version: 10.1.24-MariaDB
--- PHP Version: 7.1.6
+-- Generation Time: Jul 14, 2018 at 04:33 PM
+-- Server version: 5.7.18-log
+-- PHP Version: 7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -50,9 +50,16 @@ CREATE TABLE `event` (
   `enddate` date NOT NULL,
   `description` varchar(300) NOT NULL,
   `locality` varchar(30) NOT NULL,
-  `trainees` int(10) NOT NULL,
+  `trainees` varchar(10) NOT NULL,
   `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`eid`, `eventname`, `startdate`, `enddate`, `description`, `locality`, `trainees`, `status`) VALUES
+(1, 'cfg', '2018-09-05', '2018-10-05', 'asdfgh', 'hyd', '20', 'upcoming');
 
 -- --------------------------------------------------------
 
@@ -78,10 +85,18 @@ CREATE TABLE `user` (
   `uid` int(20) NOT NULL,
   `name` varchar(30) NOT NULL,
   `designation` varchar(20) NOT NULL,
-  `phone` int(10) NOT NULL,
+  `phone` varchar(20) NOT NULL,
   `locality` varchar(30) NOT NULL,
   `password` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`uid`, `name`, `designation`, `phone`, `locality`, `password`) VALUES
+(1, 'abc', 'volunteer', '78965', 'nallakunta', 'pass'),
+(2, 'dfgh', 'cvb', '234', 'dfgh', 'sdfg');
 
 --
 -- Indexes for dumped tables
@@ -118,12 +133,12 @@ ALTER TABLE `activity`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `eid` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `eid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `uid` int(20) NOT NULL AUTO_INCREMENT;COMMIT;
+  MODIFY `uid` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
