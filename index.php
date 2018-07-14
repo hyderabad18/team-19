@@ -257,6 +257,26 @@ $app->get('/getUpcoming', function() use ($app){
     echoResponse(200,$response);
 });
 
+$app->get('/getEventsDone', function() use ($app){
+    $db = new DbOperation();
+    $result = $db->getEventsDone();
+    $response = array();
+    $response['error'] = false;
+    $response['eventsdone'] = array();
+
+    while($row = $result->fetch_assoc()){
+        $temp = array();
+        $temp['eid'] = $row['eid'];
+        $temp['eventname'] = $row['eventname'];
+		$temp['description'] = $row['description'];
+        $temp['startdate'] = $row['startdate'];
+		$temp['enddate'] = $row['enddate'];
+		$temp['hours'] = $row['hours'];
+        array_push($response['events'],$temp);
+    }
+
+    echoResponse(200,$response);
+});
 /*function echoResponse($status_code, $response)
 {
     $app = \Slim\Slim::getInstance();
