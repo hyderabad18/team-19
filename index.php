@@ -40,11 +40,7 @@ $app->post('/createEvent', function () use ($app) {
     }
 });
 
-/* *
- * URL: http://localhost/StudentApp/v1/studentlogin
- * Parameters: username, password
- * Method: POST
- * */
+
 $app->post('/addDayActivity', function () use ($app) {
     verifyRequiredParams(array('uid', 'eid', 'checkin','checkout','date'));
     $response = array();
@@ -70,23 +66,15 @@ $app->post('/addDayActivity', function () use ($app) {
     }
 });
 
-
-/* *
- * URL: http://localhost/StudentApp/v1/createfaculty
- * Parameters: name, username, password, subject
- * Method: POST
- * 
-$app->post('/createfaculty', function () use ($app) {
-    verifyRequiredParams(array('name', 'username', 'password', 'subject'));
-    $name = $app->request->post('name');
-    $username = $app->request->post('username');
-    $password = $app->request->post('password');
-    $subject = $app->request->post('subject');
-
-    $db = new DbOperation();
+$app->post('/registerVolunteer', function () use ($app) {
+    verifyRequiredParams(array('name', 'phone','locality', 'password'));
     $response = array();
-
-    $res = $db->createFaculty($name, $username, $password, $subject);
+    $name = $app->request->post('name');
+    $phone = $app->request->post('phone');
+    $locality = $app->request->post('locality');
+    $password = $app->request->post('password');
+    $db = new DbOperation();
+    $res = $db->addUser($name, $phone,$locality, $password);
     if ($res == 0) {
         $response["error"] = false;
         $response["message"] = "You are successfully registered";
@@ -97,44 +85,40 @@ $app->post('/createfaculty', function () use ($app) {
         echoResponse(200, $response);
     } else if ($res == 2) {
         $response["error"] = true;
-        $response["message"] = "Sorry, this faculty already existed";
+        $response["message"] = "Sorry, this user  already existed";
         echoResponse(200, $response);
     }
 });
 
-*/
-/* *
- * URL: http://localhost/StudentApp/v1/facultylogin
- * Parameters: username, password
- * Method: POST
- * 
 
-$app->post('/facultylogin', function() use ($app){
+
+
+$app->post('/Adminlogin', function() use ($app){
     verifyRequiredParams(array('username','password'));
     $username = $app->request->post('username');
     $password = $app->request->post('password');
-
+  if($username=="admin" && $password=="admin"){
     $db = new DbOperation();
 
     $response = array();
 
     if($db->facultyLogin($username,$password)){
-        $faculty = $db->getFaculty($username);
+        $admin = $db->getAdmin($username);
         $response['error'] = false;
-        $response['id'] = $faculty['id'];
-        $response['name'] = $faculty['name'];
-        $response['username'] = $faculty['username'];
-        $response['subject'] = $faculty['subject'];
-        $response['apikey'] = $faculty['api_key'];
+        $response['uid'] = $admin['uid'];
+        $response['name'] = $admin['name'];
+        $response['username'] = $admin['username'];
+        $response['subject'] = $admin['subject'];
+        $response['apikey'] = $admin['api_key'];
     }else{
         $response['error'] = true;
         $response['message'] = "Invalid username or password";
     }
-
+  }
     echoResponse(200,$response);
 });
 
-*/
+
 /* *
  * URL: http://localhost/StudentApp/v1/createassignment
  * Parameters: name, details, facultyid, studentid
@@ -277,7 +261,7 @@ $app->get('/getEventsDone', function() use ($app){
 
     echoResponse(200,$response);
 });
-/*function echoResponse($status_code, $response)
+function echoResponse($status_code, $response)
 {
     $app = \Slim\Slim::getInstance();
     $app->status($status_code);
@@ -314,50 +298,4 @@ function verifyRequiredParams($required_fields)
     }
 }
 
-function authenticateStudent(\Slim\Route $route)
-{
-    $headers = apache_request_headers();
-    $response = array();
-    $app = \Slim\Slim::getInstance();
-
-    if (isset($headers['Authorization'])) {
-        $db = new DbOperation();
-        $api_key = $headers['Authorization'];
-        if (!$db->isValidStudent($api_key)) {
-            $response["error"] = true;
-            $response["message"] = "Access Denied. Invalid Api key";
-            echoResponse(401, $response);
-            $app->stop();
-        }
-    } else {
-        $response["error"] = true;
-        $response["message"] = "Api key is misssing";
-        echoResponse(400, $response);
-        $app->stop();
-    }
-}
-
-
-function authenticateFaculty(\Slim\Route $route)
-{
-    $headers = apache_request_headers();
-    $response = array();
-    $app = \Slim\Slim::getInstance();
-    if (isset($headers['Authorization'])) {
-        $db = new DbOperation();
-        $api_key = $headers['Authorization'];
-        if (!$db->isValidFaculty($api_key)) {
-            $response["error"] = true;
-            $response["message"] = "Access Denied. Invalid Api key";
-            echoResponse(401, $response);
-            $app->stop();
-        }
-    } else {
-        $response["error"] = true;
-        $response["message"] = "Api key is misssing";
-        echoResponse(400, $response);
-        $app->stop();
-    }
-}
-*/
 $app->run();
