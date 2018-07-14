@@ -13,15 +13,17 @@ class DbOperation
 
 
     //Method to register a new student
-    public function addUser($name,$phone,$address,$pass){
+    public function addUser($name,$des,$phone,$locality,$pass){
         if (!$this->isUserExists($name,$pass)) {
-            
 
-            $des="volunteer";
-            $stmt = $this->con->prepare("INSERT INTO user(name, designation,phone,locality, password) values(?, ?, ?, ?,?)");
-            $stmt->bind_param("sssss", $name, $des,$phone,$locality, $pass);
+
+            //$des="volunteer";
+            $stmt = $this->con->prepare("INSERT INTO user(name,designation,phone,locality,password) values(?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssss", $name, $des,$phone,$locality,$pass);
+            echo "hey";
             $result = $stmt->execute();
             $stmt->close();
+
             if ($result) {
                 return 0;
             } else {
