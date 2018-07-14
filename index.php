@@ -118,6 +118,27 @@ $app->post('/Adminlogin', function() use ($app){
 });
 
 
+$app->post('/Volunteerlogin', function() use ($app){
+    verifyRequiredParams(array('username','password'));
+    $username = $app->request->post('username');
+    $password = $app->request->post('password');
+    $db = new DbOperation();
+
+    $response = array();
+
+    if($db->VolunteerLogin($username,$password)){
+        $volunteer = $db->getVolunteer($username);
+        $response['error'] = false;
+        $response['uid'] = $admin['uid'];
+        $response['name'] = $admin['name'];
+        $response['phone'] = $admin['phone'];
+        $response['locality'] = $admin['locality'];
+    }else{
+        $response['error'] = true;
+        $response['message'] = "Invalid username or password";
+    }
+    echoResponse(200,$response);
+});
 /* *
  * URL: http://localhost/StudentApp/v1/createassignment
  * Parameters: name, details, facultyid, studentid
