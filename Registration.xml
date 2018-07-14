@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.dakhilreddy.jpmcproj.ThirdActivity"
+    tools:showIn="@layout/activity_third">
+
+    <EditText
+        android:id="@+id/editTextRegistration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textPersonName"
+        android:text=""
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="69dp"
+        android:layout_marginStart="69dp"
+        android:layout_marginTop="47dp" />
+
+    <EditText
+        android:id="@+id/RegisEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextRegistration"
+        android:layout_alignStart="@+id/editTextRegistration"
+        android:layout_below="@+id/editTextRegistration"
+        android:layout_marginTop="21dp"
+        android:ems="10"
+        android:hint="email"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/RegisPno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:ems="10"
+        android:hint="phonenumber"
+        android:inputType="phone"
+        android:layout_below="@+id/RegisEmail"
+        android:layout_alignLeft="@+id/RegisEmail"
+        android:layout_alignStart="@+id/RegisEmail" />
+
+    <EditText
+        android:id="@+id/Regispass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/RegisPno"
+        android:layout_alignRight="@+id/RegisPno"
+        android:layout_below="@+id/RegisPno"
+        android:layout_marginTop="23dp"
+        android:ems="10"
+        android:hint="password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/Regisrepass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/Regispass"
+        android:layout_alignRight="@+id/Regispass"
+        android:layout_below="@+id/Regispass"
+        android:layout_marginTop="29dp"
+        android:ems="10"
+        android:hint="Reenter Password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/RegisPincode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Regisrepass"
+        android:layout_alignStart="@+id/Regisrepass"
+        android:layout_below="@+id/Regisrepass"
+        android:layout_marginTop="33dp"
+        android:ems="10"
+        android:hint="pincode"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/RegisPincode"
+        android:layout_alignStart="@+id/RegisPincode"
+        android:layout_below="@+id/RegisPincode"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="13dp"
+        android:text="SUBMIT" />
+
+</RelativeLayout>
