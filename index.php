@@ -50,7 +50,7 @@ $app->post('/addDayActivity', function () use ($app) {
 	$checkout = $app->request->post('checkout');
     $date = $app->request->post('date');
     $db = new DbOperation();
-    $res = $db->createEvent($uid, $eid, $checkin,$checkout,$date);
+    $res = $db->addActivity($uid, $eid, $checkin,$checkout,$date);
     if ($res == 0) {
         $response["error"] = false;
         $response["message"] = "You are successfully registered";
