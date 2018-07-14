@@ -236,7 +236,28 @@ $app->get('/getEnrolled', function() use ($app){
     echoResponse(200,$response);
 });
 
-function echoResponse($status_code, $response)
+
+$app->get('/getUpcoming', function() use ($app){
+    $db = new DbOperation();
+    $result = $db->getUpcomingEvents();
+    $response = array();
+    $response['error'] = false;
+    $response['upevents'] = array();
+
+    while($row = $result->fetch_assoc()){
+        $temp = array();
+        $temp['eid'] = $row['eid'];
+        $temp['eventname'] = $row['eventname'];
+		$temp['description'] = $row['description'];
+        $temp['startdate'] = $row['startdate'];
+		$temp['enddate'] = $row['enddate'];
+        array_push($response['events'],$temp);
+    }
+
+    echoResponse(200,$response);
+});
+
+/*function echoResponse($status_code, $response)
 {
     $app = \Slim\Slim::getInstance();
     $app->status($status_code);
@@ -318,5 +339,5 @@ function authenticateFaculty(\Slim\Route $route)
         $app->stop();
     }
 }
-
+*/
 $app->run();
