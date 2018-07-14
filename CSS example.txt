@@ -1,0 +1,137 @@
+// CheckLogin Function to validate format of input
+
+public void checkLogin(View arg0) {
+
+        final String email = emailEditText.getText().toString();
+        if (!isValidEmail(email)) {
+            //Set error message for email field
+            emailEditText.setError("Invalid Email");
+        }
+
+        final String pass = passEditText.getText().toString();
+        if (!isValidPassword(pass)) {
+            //Set error message for password field
+            passEditText.setError("Password cannot be empty");
+        }
+
+        if(isValidEmail(email) && isValidPassword(pass))
+        {
+            // Validation Completed
+        }
+
+    }
+----------------------------------------------------------------------
+//Validation Functions
+
+private boolean isValidEmail(String email) {
+        String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    // validating password
+    private boolean isValidPassword(String pass) {
+        if (pass != null && pass.length() >= 4) {
+            return true;
+        }
+        return false;
+    }
+--------------------------------------------------------------------------
+
+//activity_main.xml
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@mipmap/back_login"
+    android:padding="40dp">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/username"
+        android:drawableLeft="@mipmap/account"
+        android:hint="Username"
+        android:layout_marginTop="170dp"
+        android:textColor="#FFF"
+        android:paddingLeft="0dp"
+        android:drawablePadding="5dp"
+        android:textColorHint="#999"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/password"
+        android:drawableLeft="@mipmap/lock"
+        android:hint="Password"
+        android:layout_marginTop="10dp"
+        android:textColor="#FFF"
+        android:paddingLeft="0dp"
+        android:drawablePadding="5dp"
+        android:textColorHint="#999"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="SignIn"
+        android:id="@+id/button"
+        android:background="@drawable/selector_xml_btn_yellow"
+        android:layout_gravity="center_horizontal"
+        android:onClick="checkLogin"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Forgot password?"
+        android:id="@+id/textView3"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:textColor="#FFF"
+        />
+
+</LinearLayout>
+----------------------------------------------------------------------
+
+//file in Drawable folder
+
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" >
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <corners android:radius="5dp" />
+            <solid android:color="#D5AA00" />
+        </shape>
+    </item>
+    <item >
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <corners android:radius="5dp" />
+            <solid android:color="#FFCC00" />
+        </shape>
+    </item>
+</selector>
+
+---------------------------------------------------------------
+
+//Styles.xml
+
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+</resources>
