@@ -75,7 +75,7 @@ $app->post('/addDayActivity', function () use ($app) {
  * URL: http://localhost/StudentApp/v1/createfaculty
  * Parameters: name, username, password, subject
  * Method: POST
- * */
+ * 
 $app->post('/createfaculty', function () use ($app) {
     verifyRequiredParams(array('name', 'username', 'password', 'subject'));
     $name = $app->request->post('name');
@@ -102,12 +102,12 @@ $app->post('/createfaculty', function () use ($app) {
     }
 });
 
-
+*/
 /* *
  * URL: http://localhost/StudentApp/v1/facultylogin
  * Parameters: username, password
  * Method: POST
- * */
+ * 
 
 $app->post('/facultylogin', function() use ($app){
     verifyRequiredParams(array('username','password'));
@@ -134,12 +134,12 @@ $app->post('/facultylogin', function() use ($app){
     echoResponse(200,$response);
 });
 
-
+*/
 /* *
  * URL: http://localhost/StudentApp/v1/createassignment
  * Parameters: name, details, facultyid, studentid
  * Method: POST
- * */
+ * 
 $app->post('/createassignment',function() use ($app){
     verifyRequiredParams(array('name','details','facultyid','studentid'));
 
@@ -163,13 +163,13 @@ $app->post('/createassignment',function() use ($app){
     echoResponse(200,$response);
 
 });
-
+*/
 /* *
  * URL: http://localhost/StudentApp/v1/assignments/<student_id>
  * Parameters: none
  * Authorization: Put API Key in Request Header
  * Method: GET
- * */
+ * 
 $app->get('/assignments/:id', 'authenticateStudent', function($student_id) use ($app){
     $db = new DbOperation();
     $result = $db->getAssignments($student_id);
@@ -187,14 +187,14 @@ $app->get('/assignments/:id', 'authenticateStudent', function($student_id) use (
     }
     echoResponse(200,$response);
 });
-
+*/
 
 /* *
  * URL: http://localhost/StudentApp/v1/submitassignment/<assignment_id>
  * Parameters: none
  * Authorization: Put API Key in Request Header
  * Method: PUT
- * */
+ * 
 
 $app->put('/submitassignment/:id', 'authenticateFaculty', function($assignment_id) use ($app){
     $db = new DbOperation();
@@ -209,7 +209,7 @@ $app->put('/submitassignment/:id', 'authenticateFaculty', function($assignment_i
     }
     echoResponse(200,$response);
 });
-
+*/
 
 /* *
  * URL: http://localhost/StudentApp/v1/students
@@ -217,19 +217,20 @@ $app->put('/submitassignment/:id', 'authenticateFaculty', function($assignment_i
  * Authorization: Put API Key in Request Header
  * Method: GET
  * */
-$app->get('/students', 'authenticateFaculty', function() use ($app){
+$app->get('/getEnrolled', function() use ($app){
     $db = new DbOperation();
-    $result = $db->getAllStudents();
+    $result = $db->getAllEnrolledEvents();
     $response = array();
     $response['error'] = false;
-    $response['students'] = array();
+    $response['events'] = array();
 
     while($row = $result->fetch_assoc()){
         $temp = array();
-        $temp['id'] = $row['id'];
-        $temp['name'] = $row['name'];
-        $temp['username'] = $row['username'];
-        array_push($response['students'],$temp);
+        $temp['uid'] = $row['uid'];
+        $temp['eid'] = $row['eid'];
+        $temp['status'] = $row['status'];
+		$temp['locality'] = $row['locality'];
+        array_push($response['events'],$temp);
     }
 
     echoResponse(200,$response);
