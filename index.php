@@ -24,7 +24,7 @@ $app->post('/createEvent', function () use ($app) {
 	$trainee = $app->request->post('trainee');
 	$status = $app->request->post('status');
     $db = new DbOperation();
-    $res = $db->createStudent($eventname, $startdate, $enddate,$description,$locality,$trainee,$status);
+    $res = $db->createEvent($eventname, $startdate, $enddate,$description,$locality,$trainee,$status);
     if ($res == 0) {
         $response["error"] = false;
         $response["message"] = "You are successfully registered";
@@ -45,25 +45,31 @@ $app->post('/createEvent', function () use ($app) {
  * Parameters: username, password
  * Method: POST
  * */
-$app->post('/studentlogin', function () use ($app) {
-    verifyRequiredParams(array('username', 'password'));
-    $username = $app->request->post('username');
-    $password = $app->request->post('password');
-    $db = new DbOperation();
+$app->post('/addDayActivity', function () use ($app) {
+    verifyRequiredParams(array('uid', 'eid', 'checkin','checkout','date'));
     $response = array();
-    if ($db->studentLogin($username, $password)) {
-        $student = $db->getStudent($username);
-        $response['error'] = false;
-        $response['id'] = $student['id'];
-        $response['name'] = $student['name'];
-        $response['username'] = $student['username'];
-        $response['apikey'] = $student['api_key'];
-    } else {
-        $response['error'] = true;
-        $response['message'] = "Invalid username or password";
+    $uid = $app->request->post('uid');
+    $eid = $app->request->post('eid');
+    $checkin = $app->request->post('checkin');
+	$checkout = $app->request->post('checkout');
+    $date = $app->request->post('date');
+    $db = new DbOperation();
+    $res = $db->createEvent($uid, $eid, $checkin,$checkout,$date);
+    if ($res == 0) {
+        $response["error"] = false;
+        $response["message"] = "You are successfully registered";
+        echoResponse(201, $response);
+    } else if ($res == 1) {
+        $response["error"] = true;
+        $response["message"] = "Oops! An error occurred while registereing";
+        echoResponse(200, $response);
+    } else if ($res == 2) {
+        $response["error"] = true;
+        $response["message"] = "Sorry, this event already existed";
+        echoResponse(200, $response);
     }
-    echoResponse(200, $response);
 });
+
 
 /* *
  * URL: http://localhost/StudentApp/v1/createfaculty
