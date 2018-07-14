@@ -107,9 +107,8 @@ $app->post('/Adminlogin', function() use ($app){
         $response['error'] = false;
         $response['uid'] = $admin['uid'];
         $response['name'] = $admin['name'];
-        $response['username'] = $admin['username'];
-        $response['subject'] = $admin['subject'];
-        $response['apikey'] = $admin['api_key'];
+        $response['phone'] = $admin['phone'];
+        $response['locality'] = $admin['locality'];
     }else{
         $response['error'] = true;
         $response['message'] = "Invalid username or password";
