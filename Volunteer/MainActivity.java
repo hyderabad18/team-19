@@ -23,20 +23,20 @@ EditText et1;
 	 bt3=(Button)findViewById(R.id.notifyeve);
 	 bt1.setOnClickListener(new View.OnClickListener(){
 		 public void onClick(View view){
-			 Intent it=new Intent(MainActivity.this,EventPost.class);
+			 Intent it=new Intent(MainActivity.this,EventPostActivity.class);
 			 startActivity(it);
 			 
 		 }
 	 });
 	 bt2.setOnClickListener(new View.OnClickListener(){
 		 public void onClick(View view){
-			 Intent it=new Intent(MainActivity.this,EventVolunteerList.class);
+			 Intent it=new Intent(MainActivity.this,VolunteerEventActivity.class);
 			 startActivity(it);
 		 }
 	 });
 	 bt3.setOnClickListener(new View.OnClickListener(){
 		 public void onClick(View view){
-			 Intent it=new Intent(MainActivity.this,VolunteerNotification.class);
+			 Intent it=new Intent(MainActivity.this,VolunteerNotificationActivity.class);
 			 startActivity(it);
 		 }
 	 });
