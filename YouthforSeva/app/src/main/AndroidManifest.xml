@@ -34,6 +34,12 @@
             android:name=".activity_profile"
             android:label="@string/title_activity_profile" />
         <activity
+            android:name=".EventReg"
+            android:label="EventReg" />
+        <activity
+            android:name=".EventDisplay"
+            android:label="EventDisplay" />
+        <activity
             android:name=".log_vol"
             android:label="@string/title_activity_log_vol" />
         <activity

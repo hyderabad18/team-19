@@ -20,7 +20,7 @@ TextView tv;
         {
             @Override
             public void onClick(View v) {
-                Intent it=new Intent(log_vol.this,dash_volunteer.class);
+                Intent it=new Intent(log_vol.this,EventDisplay.class);
                 startActivity(it);
             }
         });

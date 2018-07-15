@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -34,19 +35,22 @@ public class Act_login extends Activity {
         t1=  (TextView) findViewById(R.id.textView2);
 
         b1 = (Button) findViewById(R.id.button1);
-        b1.setOnClickListener(new Button.OnClickListener(){
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                validate(e1.getText().toString(),e2.getText().toString());
+            }
+        });
 
-            public void onClick(View v)
-            {
-                try{
-                            // CALL GetText method to make post method call
-                            GetText();
-                        }
-                        catch(Exception ex) {
-                            t1.setText("url exception");
-                        }
-                    }
-                });
+    }
+    private void validate(String username ,String userpassword){
+        if ((username.equals("admin")) && (userpassword.equals("admin"))) {
+            Intent intent = new Intent(Act_login.this, EventReg.class);
+            startActivity(intent);
+        }
+        else{
+            Toast.makeText(this,"wrong credentials",Toast.LENGTH_SHORT).show();
+        }
     }
     // Create GetText Metod
     public  void  GetText()  throws UnsupportedEncodingException
