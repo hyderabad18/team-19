@@ -1,0 +1,42 @@
+//Dependency
+
+dependencies {
+    implementation "com.android.support:support-compat:27.1.1"
+}
+
+-----------------------------------------------------------------------
+
+// Set Notification Content
+
+NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
+        .setSmallIcon(R.drawable.notification_icon)
+        .setContentTitle(textTitle)
+        .setContentText(textContent)
+        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+-----------------------------------------------------------------------------
+
+//For Larger text Notifications
+
+SET NOTIFICATION + 
+.setStyle(new NotificationCompat.BigTextStyle()
+                .bigText("Much longer text that cannot fit one line..."))
+
+---------------------------------------------------------------------------------
+
+// Notification Tap Action
+
+// Create an explicit intent for an Activity in your app
+Intent intent = new Intent(this, AlertDetails.class);
+intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
+        .setSmallIcon(R.drawable.notification_icon)
+        .setContentTitle("My notification")
+        .setContentText("Hello World!")
+        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        // Set the intent that will fire when the user taps the notification
+        .setContentIntent(pendingIntent)
+        .setAutoCancel(true);
+
+------------------------------------------------------------------------------------
