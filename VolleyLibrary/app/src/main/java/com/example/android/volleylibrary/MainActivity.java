@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button button;
     EditText Eventname,Startdate,Enddate,Locality,Description,Trainee,Status;
-    String server_url="http://10.49.49.136/update_info.php";
+    String server_url="http://10.0.2.2/cfg/v1/createEvent";
+    //String server_url="http://10.0.2.2/update_info.php";
     AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +43,14 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String name,sdate,edate,des,loc,traine,stat;
+                final String name,startdate,enddate,description,locality,trainee,status;
                 name=Eventname.getText().toString();
-                sdate=Startdate.getText().toString();
-                edate=Enddate.getText().toString();
-                des=Description.getText().toString();
-                loc=Locality.getText().toString();
-                traine=Trainee.getText().toString();
-                stat=Status.getText().toString();
+                startdate=Startdate.getText().toString();
+                enddate=Enddate.getText().toString();
+                description=Description.getText().toString();
+                locality=Locality.getText().toString();
+                trainee=Trainee.getText().toString();
+                status=Status.getText().toString();
                 StringRequest stringRequest=new StringRequest(Request.Method.POST, server_url,
                         new Response.Listener<String>() {
                             @Override
@@ -82,20 +84,28 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }){
                     @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("Content-Type","application/x-www-form-urlencoded");
+                        return params;
+                    }
+
+                    @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String,String> params = new HashMap<String, String>();
                         params.put("eventname",name);
-                        params.put("startdate",sdate);
-                        params.put("enddate",edate);
-                        params.put("description",des);
-                        params.put("locality",loc);
-                        params.put("trainee",traine);
-                        params.put("status",stat);
+                        params.put("startdate",startdate);
+                        params.put("enddate",enddate);
+                        params.put("description",description);
+                        params.put("locality",locality);
+                        params.put("trainee",trainee);
+                        params.put("status",status);
+                        Log.i("PARAMS", params.toString());
 
 
-
-                        return super.getParams();
+                        return params;
                     }
+
                 };
                 MySingleton.getInstance(MainActivity.this).addTorequestque(stringRequest);
             }
