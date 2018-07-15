@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+
+tools:context=".MainActivity">
+<!-- display two Button's and a FrameLayout to replace the Fragment's  -->
+<Button
+android:id="@+id/firstFragment"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:background="#000000"
+android:text="First Fragment"
+android:textColor="#ffffff"
+android:textSize="20sp" />
+
+<Button
+android:id="@+id/secondFragment"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginTop="10dp"
+android:background="#000000"
+android:text="Second Fragment"
+android:textColor="#ffffff"
+android:textSize="20sp" />
+<Button
+android:id="@+id/thirdFragment"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginTop="10dp"
+android:background="#000000"
+android:text="Third Fragment"
+android:textColor="#ffffff"
+android:textSize="20sp" />
+
+<FrameLayout
+android:id="@+id/frameLayout"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:layout_marginTop="10dp" />
+</LinearLayout>
