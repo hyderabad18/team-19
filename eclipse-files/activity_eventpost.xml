@@ -1,0 +1,93 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EventPostActivity" >
+
+    <EditText
+        android:id="@+id/eventdes1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="29dp"
+        android:ems="10"
+        android:hint="Event Description"
+        android:inputType="textMultiLine" />
+
+    <EditText
+        android:id="@+id/eventdes1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="29dp"
+        android:ems="10"
+        android:hint="Event Description"
+        android:inputType="textMultiLine" />
+
+    <EditText
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/eventdes1"
+        android:layout_below="@+id/eventdes1"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:hint="Location"
+        android:inputType="textPostalAddress" />
+
+    <EditText
+        android:id="@+id/edate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/location"
+        android:layout_below="@+id/location"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="EndDate"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/sdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/eventdes1"
+        android:layout_below="@+id/eventdes1"
+        android:ems="10"
+        android:hint="startdate"
+        android:inputType="date" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/edate"
+        android:layout_below="@+id/edate"
+        android:layout_marginTop="74dp"
+        android:ems="10"
+        android:hint="status"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/trainee"
+        android:layout_marginBottom="50dp"
+        android:text="SendNotification" />
+
+    <EditText
+        android:id="@+id/students"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/status"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:hint="No of participants"
+        android:inputType="text" />
+
+    </RelativeLayout>
+
