@@ -93,16 +93,16 @@ $app->post('/registerVolunteer', function () use ($app) {
 
 
 
-$app->post('/Adminlogin', function() use ($app){
+$app->post('/adminlogin', function() use ($app){
     verifyRequiredParams(array('username','password'));
     $username = $app->request->post('username');
     $password = $app->request->post('password');
-  if($username=="admin" && $password=="admin"){
+  
     $db = new DbOperation();
 
     $response = array();
 
-    if($db->facultyLogin($username,$password)){
+    if($username=="admin" && $password=="admin")){
         $admin = $db->getAdmin($username);
         $response['error'] = false;
         $response['uid'] = $admin['uid'];
@@ -113,7 +113,7 @@ $app->post('/Adminlogin', function() use ($app){
         $response['error'] = true;
         $response['message'] = "Invalid username or password";
     }
-  }
+  
     echoResponse(200,$response);
 });
 
